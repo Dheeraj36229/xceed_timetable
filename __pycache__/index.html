@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable Automation Bot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <div style="text-align: center; margin-bottom: 1rem;">
+        <img src="https://xceed.nitj.ac.in/clublogo.png" alt="Xceed Logo" style="max-width: 200px; height: auto;">
+        </div>
+            <p >
+                Select your details to generate the timetable.<br>
+                <small style="color: gray;">Made by <a href="https://www.instagram.com/dheeraj.__2007/" 
+           target="_blank" 
+           style="color: #007bff; text-decoration: none; font-weight: bold;">Dheeraj</a></small>
+            </p>
+        <div class="input-group">
+            <label for="instagram">Instagram Username</label>
+            <div class="input-wrapper">
+                <span class="prefix">@</span>
+                <input type="text" id="instagram" placeholder="your_username" required>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label for="session">Select Session</label>
+            <select id="session" class="custom-select" required>
+                <option value="" disabled selected>Choose Session</option>
+                <option value="2025-2026 (Even)">2025-2026 (Even)</option>
+                <option value="2025-2026 (Odd)">2025-2026 (Odd)</option>
+                <option value="2024-2025 (Even)">2024-2025 (Even)</option>
+                <option value="2024-2025 (Odd)">2024-2025 (Odd)</option>
+                <option value="2023-2024 (Even)">2023-2024 (Even)</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="department">Select Department</label>
+            <select id="department" class="custom-select" required>
+                <option value="">Select Department</option>
+                    <option value="Basic Sciences">Basic Sciences</option>
+                    <option value="Biotechnology">Biotechnology</option>
+                    <option value="Center for Artificial Intelligence">Center for Artificial Intelligence</option>
+                    <option value="Center for Energy and Environment">Center for Energy and Environment</option>
+                    <option value="Chemical Engineering">Chemical Engineering</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Civil Engineering">Civil Engineering</option>
+                    <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                    <option value="Electrical Engineering">Electrical Engineering</option>
+                    <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+                    <option value="Humanities and Management">Humanities and Management</option>
+                    <option value="Industrial and Production Engineering">Industrial and Production Engineering</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="Instrumentation and Control Engineering">Instrumentation and Control Engineering</option>
+                    <option value="ITEP">ITEP</option>
+                    <option value="Mathematics & Computing">Mathematics & Computing</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Textile Technology">Textile Technology</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="dynamicOption">Select Semester/Section</label>
+            <select id="dynamicOption" class="custom-select" disabled>
+                <option value="">Select Session & Dept First</option>
+            </select>
+        </div>
+        
+        <div class="button-container">
+            <button type="button" id="sendPdfBtn" class="secondary-btn" disabled>Send PDF</button>
+            <button type="button" id="remindBtn" class="accent-btn" disabled>Set Reminder</button>
+        </div>
+        <div id="statusMessage"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
