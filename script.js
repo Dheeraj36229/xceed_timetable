@@ -231,7 +231,7 @@ sendPdfBtn.onclick = function() {
     statusMsg.style.color = "#3182ce";
     this.disabled = true;
 
-    fetch('http://127.0.0.1:5000/process-all', {
+    fetch('/process-all', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -265,7 +265,7 @@ remindBtn.onclick = function() {
     statusMsg.textContent = "Scheduling reminder...";
     statusMsg.style.color = "#805ad5";
 
-    fetch('http://127.0.0.1:5000/set-reminder', {
+    fetch('/set-reminder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload) // <--- SENDING THE FULL PAYLOAD NOW
