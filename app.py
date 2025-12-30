@@ -7,7 +7,7 @@ from botworker import reminderstart
 
 app = Flask(__name__, 
             template_folder='__pycache__', 
-            static_folder='static')
+            static_folder='__pycache__')
 CORS(app)
 
 FILE_NAME = "user_settings.txt"
