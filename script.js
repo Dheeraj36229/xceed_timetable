@@ -231,7 +231,7 @@ sendPdfBtn.onclick = function() {
     statusMsg.style.color = "#3182ce";
     this.disabled = true;
 
-    fetch('/process-all', {
+    fetch('https://xceed-timetable.onrender.com/process-all', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -265,7 +265,7 @@ remindBtn.onclick = function() {
     statusMsg.textContent = "Scheduling reminder...";
     statusMsg.style.color = "#805ad5";
 
-    fetch('/set-reminder', {
+    fetch('https://xceed-timetable.onrender.com/set-reminder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload) // <--- SENDING THE FULL PAYLOAD NOW
