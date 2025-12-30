@@ -1,0 +1,118 @@
+const timetableData = {
+    "2025-2026 (Even)": {
+        "Basic Sciences": [
+            "B.Tech-ME_SectionB4", "B.Tech-BT+MCE-SectionA5", "B.Tech-CE-SectionA1",
+            "B.Tech-TT-SectionA2", "B.Tech-IT-SectionA3", "B.Tech-EE+IT-SectionA4",
+            "B.Tech-ICE-SectionA6", "SectionB3", "SectionB5", "B.Tech-CSE-SectionB1",
+            "B.Tech-CSE+DS-SectionB2", "B.Tech-CH+VLSI-SectionB6", "Integrated-B.Sc-B.Ed-Sem2",
+            "Integrated-B.Sc-B.Ed-Sem4", "Integrated-B.Sc-B.Ed-Sem6"
+        ],
+        "Biotechnology": [
+    "B.Tech-BT-4",
+    "B.Tech-BT-8",
+    "B.Tech-BT-6",
+    "M.Tech-BT-2"
+],"Center for Artificial Intelligence" : [],
+"Center for Energy and Environment":[],
+"Chemical Engineering":[
+    "B.Tech-CH-4",
+    "B.Tech-CH-6",
+    "B.Tech-CH-8",
+    "M.Tech-CHE-2"
+],"Chemistry":[
+    "M.Sc-CHE-2",
+    "M.Sc-CHE-4"
+],"Civil Engineering":[
+    "B.Tech-CE-4",
+    "B.Tech-CE-6",
+    "B.Tech-CE-8",
+    "M.Tech-SCE-2",
+    "M.Tech-GEID-2"
+],"Computer Science and Engineering":[
+    "B.Tech-CSE-4A",
+    "B.Tech-CSE-4B",
+    "B.Tech-CSE-6A",
+    "B.Tech-CSE-6B",
+    "B.Tech-CSE-8A",
+    "B.Tech-CSE-8B",
+    "M.Tech-CSE-2",
+    "M.Tech-IS-2",
+    "M.Tech-DSE-2"
+],"Electrical Engineering":[
+    "B.Tech-EE-4",
+    "B.Tech-EE-6",
+    "B.Tech-EE-8",
+    "M.Tech-EVD-2"
+],"Electronics and Communication Engineering":[
+    "B.Tech-ECE-4",
+    "B.Tech-ECE-6",
+    "B.Tech-ECE-8",
+    "M.Tech-SPML-2",
+    "M.Tech-VL-2"
+],"Humanities and Management":[
+
+],"Industrial and Production Engineering":[
+    "B.Tech-IPE-4",
+    "B.Tech-IPE-6",
+    "B.Tech-IPE-8",
+    "M.Tech-IE-2",
+    "Ph.D-IPE"
+],"Information Technology":[
+
+],"Instrumentation and Control Engineering":[
+    "B.Tech-ICE-4",
+    "B.Tech-ICE-6",
+    "B.Tech-ICE-8",
+    "M.Tech-MIA-2"
+],"ITEP":[
+
+],"Mathematics & Computing":[
+
+],"Mechanical Engineering":[
+    "B.Tech-ME-4A",
+    "B.Tech-ME-4B",
+    "B.Tech-ME-6A",
+    "B.Tech-ME-6B",
+    "B.Tech-ME-8",
+    "M.Tech-DE-2",
+    "M.Tech.-TEE-2"
+],"Physics":[
+],"Textile Technology":[]
+    },
+    "2025-2026 (Odd)": {
+        "Basic Sciences": [
+            "B.Tech-ME_SectionB4", "B.Tech-CSE+DS-SectionB2", "B.Tech-CH+VLSI-SectionB6",
+            "B.Tech-CSE-SectionB1", "B.Tech-CE-SectionA1", "B.Tech-TT-SectionA2",
+            "B.Tech-IT-SectionA3", "B.Tech-EE+IT-SectionA4", "B.Tech-BT+MCE-SectionA5",
+            "B.Tech-ICE-SectionA6", "Integrated-B.Sc-B.Ed-2A", "Integrated-B.Sc-B.Ed-1A",
+            "Integrated-B.Sc-B.Ed-Sem5", "SectionB5", "SectionB3"
+        ]
+    },
+    "2024-2025 (Even)": {
+        "Basic Sciences": [
+            "B.Tech-CE-SectionA1", "B.Tech-TT-SectionA2", "B.Tech-IT-SectionA3",
+            "B.Tech-EE+IT-SectionA4", "B.Tech-BT+MCE-SectionA5", "B.Tech-ICE-SectionA6",
+            "B.Tech-CSE-SectionB1", "B.Tech-CSE+DS-SectionB2", "B.Tech-IPE+ME_SectionB3",
+            "B.Tech-ECE+VLSI-SectionB5", "B.Tech-CH+VLSI-SectionB6", "Integrated-B.Sc-B.Ed-Sem2",
+            "B.Tech-ME-SectionB4", "Integrated-B.Sc-B.Ed-Sem4", "B.Tech-FE-2", "B.Tech-CB-2"
+        ]
+    },
+    "2024-2025 (Odd)": {
+        "Basic Sciences": [
+            "B.Tech-ME_SectionB4", "B.Tech-IPE+ME_SectionB3", "B.Tech-CSE+DS-SectionB2",
+            "B.Tech-ECE+VLSI-SectionB5", "B.Tech-CH+VLSI-SectionB6", "B.Tech-CSE-SectionB1",
+            "B.Tech-CE-SectionA1", "B.Tech-TT-SectionA2", "B.Tech-IT-SectionA3",
+            "B.Tech-EE+IT-SectionA4", "B.Tech-BT+MCE-SectionA5", "B.Tech-ICE-SectionA6",
+            "Integrated-B.Sc-B.Ed-2A", "Integrated-B.Sc-B.Ed-1A"
+        ]
+    },
+    "2023-2024 (Even)": {
+        "Basic Sciences": [
+            "B.Tech-ME_SectionB4", "B.Tech-IPE+ME_SectionB3", "B.Tech-CSE+DS-SectionB2",
+            "B.Tech-ECE+VLSI-SectionB5", "B.Tech-CH+VLSI-SectionB6", "B.Tech-CSE-SectionB1",
+            "B.Tech-CE-SectionA1", "B.Tech-TT-SectionA2", "B.Tech-IT-SectionA3",
+            "B.Tech-EE+IT-SectionA4", "B.Tech-BT+MCE-SectionA5", "B.Tech-ICE-SectionA6",
+            "Integrated-B.Sc-B.Ed-2A", "Integrated-B.Sc-B.Ed-1A"
+        ]
+    }
+};

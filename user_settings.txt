@@ -1,0 +1,22 @@
+{
+    "dheeraj.__200": {
+        "session": null,
+        "department": null,
+        "section": null,
+        "reminder_status": "yes",
+        "status": "completed"
+    },
+    "dheeraj.__2": {
+        "session": null,
+        "department": null,
+        "section": null,
+        "reminder_status": "yes",
+        "status": "completed"
+    },
+    "dheeraj.__2007": {
+        "session": "2024-2025 (Even)",
+        "department": "Basic Sciences",
+        "section": "B.Tech-ECE+VLSI-SectionB5",
+        "status": "completed"
+    }
+}
