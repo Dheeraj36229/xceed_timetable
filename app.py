@@ -5,7 +5,9 @@ import os
 from processtimetable import process_timetables
 from botworker import reminderstart
 
-app = Flask(__name__)
+app = Flask(__name__, 
+            template_folder='__pycache__', 
+            static_folder='static')
 CORS(app)
 
 FILE_NAME = "user_settings.txt"
