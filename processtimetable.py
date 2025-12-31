@@ -133,7 +133,7 @@ def process_timetables():
         # Check if we already processed this user (optional logic)
             print(f"Generating timetable for {username}...")
             print(f"Session: {settings['session']}, Dept: {settings['department']}")
-            driver = get_driver()
+            driver = get_driver(username)
             wait = WebDriverWait(driver, 30)
             driver = get_driver(username)
             wait = WebDriverWait(driver, 30)
