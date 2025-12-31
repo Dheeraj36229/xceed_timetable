@@ -1,4 +1,6 @@
 from processtimetable import *
+import pytz
+IST = pytz.timezone('Asia/Kolkata')
 weekday = datetime.now().weekday()
 class_slots = [
         (8, 0), (9, 0), (10, 0), (11, 0), 
