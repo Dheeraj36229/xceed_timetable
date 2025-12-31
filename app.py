@@ -60,11 +60,8 @@ def process_all():
 
     # 2. Trigger bot
     try:
-        success = process_timetables()
-        if success:
-            return jsonify({"status": "success"})
-        else:
-            return jsonify({"status": "error", "message": "Bot failed to process"}), 500
+        process_timetables()
+        return jsonify({"status": "success"})
     except Exception as e:
         return jsonify({"status": "error", "message": f"Bot error: {str(e)}"}), 500
 
@@ -115,6 +112,6 @@ def set_reminder():
     return jsonify({"status": "success", "message": "Reminder set!"})
 
 if __name__ == '__main__':
-    start_keep_alive("https://your-timetable-bot.onrender.com")
+    start_keep_alive("https://xceed-timetable.onrender.com")
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
