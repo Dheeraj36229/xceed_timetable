@@ -123,7 +123,8 @@ FILE_PATH = "user_settings.json"
 
 def save_to_github(data):
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{FILE_PATH}"
-    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+    headers = {"Authorization": f"token {GITHUB_TOKEN}",
+              "Accept": "application/vnd.github.v3+json"}
     
     # Check if the file exists and get its SHA
     r = requests.get(url, headers=headers)
