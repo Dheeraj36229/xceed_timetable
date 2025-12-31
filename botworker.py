@@ -40,7 +40,7 @@ def process_single_reminder(username, settings, weekday, slot_idx, slot_time):
     driver = None
     try:
         print(f"Processing {username} for {slot_time[0]}:{slot_time[1]+25} reminder...")
-        driver = get_driver()
+        driver = get_driver(username)
         wait = WebDriverWait(driver, 30)
         
         run_timetable_selection(driver, wait, settings)
