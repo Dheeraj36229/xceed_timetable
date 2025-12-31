@@ -96,8 +96,8 @@ def run_timetable_selection(driver, wait, settings):
     safe_select(wait, "/html/body/div[1]/div/div[4]/div[2]/div[1]/select", settings["section"])
 
 def get_driver(username):
-    LT_USERNAME = "gargd9245"
-    LT_ACCESS_KEY = "LT_fekS3crEPiDLeV2gncDTnJAcl28xrARo7X84NRjo7azJR1B"
+    LT_USERNAME = "bhimkumar9874"
+    LT_ACCESS_KEY = "LT_Jp1VckEFn4HSEOr6khkpXimCy8pXHlKdM1HB3dTe3XSXVBA"
     
     # The cloud grid URL
     grid_url = f"https://{LT_USERNAME}:{LT_ACCESS_KEY}@hub.lambdatest.com/wd/hub"
