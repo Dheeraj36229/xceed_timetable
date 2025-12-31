@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
 import os
+import requests
+import base64
 from processtimetable import process_timetables
 from botworker import reminderstart
 import threading
@@ -111,12 +113,60 @@ def set_reminder():
 
     return jsonify({"status": "success", "message": "Reminder set!"})
 
+
+
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
+GITHUB_REPO = os.environ.get("GITHUB_REPO")
+FILE_PATH = "user_settings.json"
+
+def save_to_github(data):
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{FILE_PATH}"
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+    
+    # 1. Get the current file (we need the 'sha' tag to overwrite it)
+    r = requests.get(url, headers=headers)
+    sha = r.json().get("sha") if r.status_code == 200 else None
+
+    # 2. Encode the new data to Base64
+    content = base64.b64encode(json.dumps(data, indent=4).encode()).decode()
+
+    # 3. Push the update
+    payload = {
+       "message": "Update user settings [skip ci] [skip render]",
+        "content": content,
+        "branch": "main"
+    }
+    if sha:
+        payload["sha"] = sha
+
+    requests.put(url, headers=headers, json=payload)
+    print("Settings synced to GitHub!")
+
+def load_from_github():
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{FILE_PATH}"
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+    r = requests.get(url, headers=headers)
+    
+    if r.status_code == 200:
+        content = base64.b64decode(r.json()['content']).decode()
+        return json.loads(content)
+    return {}
+
 def boot_system():
-    # This function runs as soon as the server starts
-    print("Server Booted. Starting background services...")
+    print("Initializing System...")
+    # Load the latest user data from GitHub into a global variable or file
+    global_user_data = load_from_github()
+    
+    # Save it locally so the existing bot logic can read it
+    with open("user_settings.json", "w") as f:
+        json.dump(global_user_data, f)
+    
+    # Now start the background thread
     t = threading.Thread(target=reminderstart, daemon=True)
     t.start()
+    print("Background reminder service is live!")
 
+# Run boot logic
 boot_system()
 
 if __name__ == '__main__':
