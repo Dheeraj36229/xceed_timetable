@@ -95,16 +95,28 @@ def run_timetable_selection(driver, wait, settings):
     safe_select(wait, "//*[@id='root']/div/div[3]/select", settings["department"])
     safe_select(wait, "/html/body/div[1]/div/div[4]/div[2]/div[1]/select", settings["section"])
 
-def get_driver():
+def get_driver(username):
+    LT_USERNAME = "gargd9245"
+    LT_ACCESS_KEY = "LT_fekS3crEPiDLeV2gncDTnJAcl28xrARo7X84NRjo7azJR1B"
+    
+    # The cloud grid URL
+    grid_url = f"https://{LT_USERNAME}:{LT_ACCESS_KEY}@hub.lambdatest.com/wd/hub"
+
     options = Options()
-    options.add_argument("--headless")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--window-size=1920,1080")
-    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-    options.add_argument("--disable-gpu")
-    options.binary_location = "/opt/render/project/src/.render/chrome/opt/google/chrome/google-chrome"
-    return webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
+    options.browser_version = "latest"
+    options.platform_name = "Windows 10" # You can choose Linux or Mac too
+    
+    # LambdaTest specific settings
+    lt_options = {
+        "build": "TimetableBot_Build",
+        "project": "TimetableBot",
+        "name": f"Processing_{username}",
+        "w3c": True,
+        "plugin": "python-python"
+    }
+    options.set_capability('LT:Options', lt_options)
+    driver = None
+    return webdriver.Remote(command_executor=grid_url,options=options)
 
 
 def process_timetables():
@@ -123,7 +135,7 @@ def process_timetables():
             print(f"Session: {settings['session']}, Dept: {settings['department']}")
             driver = get_driver()
             wait = WebDriverWait(driver, 30)
-            driver = get_driver()
+            driver = get_driver(username)
             wait = WebDriverWait(driver, 30)
             try:
                 run_timetable_selection(driver, wait, settings)
