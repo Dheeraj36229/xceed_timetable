@@ -1,5 +1,8 @@
 from processtimetable import *
 import pytz
+import requests
+import time
+import threading
 IST = pytz.timezone('Asia/Kolkata')
 weekday = datetime.now().weekday()
 class_slots = [
@@ -60,3 +63,22 @@ def process_single_reminder(username, settings, weekday, slot_idx, slot_time):
         if driver:
             driver.quit()
 
+
+
+
+def keep_alive(url):
+    while True:
+        try:
+            # Pings your own Render URL
+            requests.get(url)
+            print("Self-ping successful. Staying awake!")
+        except Exception as e:
+            print(f"Self-ping failed: {e}")
+        
+        # Wait 10 minutes (600 seconds)
+        time.sleep(300)
+
+def start_keep_alive(url):
+    # Run the ping loop in its own thread
+    t = threading.Thread(target=keep_alive, args=(url,), daemon=True)
+    t.start()
