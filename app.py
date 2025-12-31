@@ -33,7 +33,7 @@ def process_all():
         return jsonify({"status": "error", "message": "Username is required"}), 400
     
     # 1. Load and Update Data
-    data_dict = load_data()
+    data_dict = load_from_github()
 
     # Define the payload we want to save/update
     user_payload = {
@@ -57,6 +57,7 @@ def process_all():
     try:
         with open(FILE_NAME, "w") as f:
             json.dump(data_dict, f, indent=4)
+        save_to_github(data_dict)
     except Exception as e:
         return jsonify({"status": "error", "message": f"File save failed: {str(e)}"}), 500
 
@@ -78,7 +79,7 @@ def set_reminder():
     if not username:
         return jsonify({"status": "error", "message": "Username is required"}), 400
 
-    data_dict = load_data()
+    data_dict = load_from_github()
 
     # Check if user exists, otherwise create an empty entry
     if username not in data_dict:
@@ -103,6 +104,7 @@ def set_reminder():
     # Save to file
     with open(FILE_NAME, "w") as f:
         json.dump(data_dict, f, indent=4)
+    save_to_github(data_dict)
 
     # 2. Trigger bot
     if not reminder_started:
