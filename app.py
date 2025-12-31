@@ -5,6 +5,7 @@ import os
 from processtimetable import process_timetables
 from botworker import reminderstart
 import threading
+from botworker import  start_keep_alive
 
 app = Flask(__name__)
 CORS(app)
@@ -114,5 +115,6 @@ def set_reminder():
     return jsonify({"status": "success", "message": "Reminder set!"})
 
 if __name__ == '__main__':
+    start_keep_alive("https://your-timetable-bot.onrender.com")
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
