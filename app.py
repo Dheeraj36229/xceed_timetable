@@ -111,6 +111,14 @@ def set_reminder():
 
     return jsonify({"status": "success", "message": "Reminder set!"})
 
+def boot_system():
+    # This function runs as soon as the server starts
+    print("Server Booted. Starting background services...")
+    t = threading.Thread(target=reminderstart, daemon=True)
+    t.start()
+
+boot_system()
+
 if __name__ == '__main__':
     start_keep_alive("https://xceed-timetable.onrender.com")
     port = int(os.environ.get("PORT", 5000))
