@@ -122,33 +122,32 @@ GITHUB_REPO = os.environ.get("GITHUB_REPO")
 FILE_PATH = "user_settings.json"
 
 def save_to_github(data):
-    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{FILE_PATH}"
-    headers = {"Authorization": f"token {GITHUB_TOKEN}",
-              "Accept": "application/vnd.github.v3+json"}
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/user_settings.json"
+    headers = {"Authorization": f"token {GITHUB_TOKEN}", "Accept": "application/vnd.github.v3+json"}
     
-    # Check if the file exists and get its SHA
+    # 1. Try to get the file
     r = requests.get(url, headers=headers)
-    print(f"Checking GitHub file: Status {r.status_code}") # DEBUG 1
-    
-    sha = r.json().get("sha") if r.status_code == 200 else None
-    content = base64.b64encode(json.dumps(data, indent=4).encode()).decode()
+    sha = None
+    if r.status_code == 200:
+        sha = r.json().get("sha")
+    elif r.status_code == 404:
+        print("File not found on GitHub. Creating a NEW file...")
+    else:
+        print(f"Error checking file: {r.status_code}")
+        return
 
+    # 2. Prepare Payload
+    content = base64.b64encode(json.dumps(data, indent=4).encode()).decode()
     payload = {
-        "message": "Update user settings [skip ci] [skip render]",
+        "message": "Update settings [skip ci] [skip render]",
         "content": content,
         "branch": "main"
     }
-    if sha:
-        payload["sha"] = sha
+    if sha: payload["sha"] = sha # Only add SHA if updating existing file
 
-    # The actual update
-    response = requests.put(url, headers=headers, json=payload)
-    
-    # DEBUG 2: Check the response
-    if response.status_code in [200, 201]:
-        print("Success: Data pushed to GitHub!")
-    else:
-        print(f"Failed to push! Response: {response.text}")
+    # 3. Push
+    res = requests.put(url, headers=headers, json=payload)
+    print(f"Push Result: {res.status_code}")
 
 def load_from_github():
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{FILE_PATH}"
