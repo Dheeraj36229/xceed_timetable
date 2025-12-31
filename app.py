@@ -123,24 +123,29 @@ def save_to_github(data):
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{FILE_PATH}"
     headers = {"Authorization": f"token {GITHUB_TOKEN}"}
     
-    # 1. Get the current file (we need the 'sha' tag to overwrite it)
+    # Check if the file exists and get its SHA
     r = requests.get(url, headers=headers)
+    print(f"Checking GitHub file: Status {r.status_code}") # DEBUG 1
+    
     sha = r.json().get("sha") if r.status_code == 200 else None
-
-    # 2. Encode the new data to Base64
     content = base64.b64encode(json.dumps(data, indent=4).encode()).decode()
 
-    # 3. Push the update
     payload = {
-       "message": "Update user settings [skip ci] [skip render]",
+        "message": "Update user settings [skip ci] [skip render]",
         "content": content,
         "branch": "main"
     }
     if sha:
         payload["sha"] = sha
 
-    requests.put(url, headers=headers, json=payload)
-    print("Settings synced to GitHub!")
+    # The actual update
+    response = requests.put(url, headers=headers, json=payload)
+    
+    # DEBUG 2: Check the response
+    if response.status_code in [200, 201]:
+        print("Success: Data pushed to GitHub!")
+    else:
+        print(f"Failed to push! Response: {response.text}")
 
 def load_from_github():
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{FILE_PATH}"
