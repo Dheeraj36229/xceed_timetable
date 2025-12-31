@@ -4,6 +4,7 @@ import json
 import os
 from processtimetable import process_timetables
 from botworker import reminderstart
+import threading
 
 app = Flask(__name__)
 CORS(app)
@@ -67,8 +68,10 @@ def process_all():
         return jsonify({"status": "error", "message": f"Bot error: {str(e)}"}), 500
 
 
+reminder_started = False
 @app.route('/set-reminder', methods=['POST'])
 def set_reminder():
+    global reminder_started
     new_data = request.json
     username = new_data.get('instagram')
     
@@ -102,14 +105,13 @@ def set_reminder():
         json.dump(data_dict, f, indent=4)
 
     # 2. Trigger bot
-    try:
-        success = reminderstart()
-        if success:
-            return jsonify({"status": "success", "message": "Settings saved and reminder active"})
-        else:
-            return jsonify({"status": "error", "message": "Bot failed to process"}), 500
-    except Exception as e:
-        return jsonify({"status": "error", "message": str(e)}), 500
+    if not reminder_started:
+        thread = threading.Thread(target=reminderstart, daemon=True)
+        thread.start()
+        reminder_started = True
+        print("Reminder thread spawned.")
+
+    return jsonify({"status": "success", "message": "Reminder set!"})
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
