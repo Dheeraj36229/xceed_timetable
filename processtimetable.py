@@ -17,7 +17,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 FILE_NAME = "user_settings.txt"
-USERNAME = "xceed_timetable"  
+USERNAME = "xceed._timetable"  
 PASSWORD = "88475vansh@62390"
 def get_insta_client():
     cl = Client()
